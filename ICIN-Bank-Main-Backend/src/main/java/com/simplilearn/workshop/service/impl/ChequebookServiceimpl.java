@@ -19,19 +19,19 @@ import com.simplilearn.workshop.service.ChequebookService;
 public class ChequebookServiceimpl implements ChequebookService{
 
 	@Autowired
-	private ChequeBookRepository dao;
+	private ChequeBookRepository cbrdata;
 	
 	@Autowired 
-	private AccountRepository adao;
+	private AccountRepository ardata;
 	
 	@Autowired
-	private SaccountRepository sdao;
+	private SaccountRepository savrdata;
 	
 	@Override
 	public ChequeResponse createrequest(ChequebookRequest chequebook) {
 		ChequeResponse response=new ChequeResponse();
 		long account = chequebook.getAccount();
-		List<ChequebookRequest> prevRequests = dao.findByAccount(account);
+		List<ChequebookRequest> prevRequests = cbrdata.findByAccount(account);
 		if(!prevRequests.isEmpty()) {
 			for(int i=0;i<prevRequests.size();i++) {
 				if(prevRequests.get(i).isRequestStatus()==false) {
@@ -45,14 +45,14 @@ public class ChequebookServiceimpl implements ChequebookService{
 		LocalDate today = LocalDate.now();
 		if(isprimary(account)) {
 			try {
-				Account account1 =adao.findByAccno(account);
+				Account account1 =ardata.findByAccno(account);
 				response.setAccount(account1.getAccno());
 				response.setStatus(true);
 				response.setResponseMessage("Success Code 120: Request submitted successfully");
 				chequebook.setAccType("Primary");
 				chequebook.setDate(today);
 				chequebook.setRequestStatus(false);
-				dao.save(chequebook);
+				cbrdata.save(chequebook);
 				}
 				catch(Exception e) {
 					response.setAccount(account);
@@ -64,14 +64,14 @@ public class ChequebookServiceimpl implements ChequebookService{
 		else {
 			if(isSecondary(account)) {
 				try {
-					Saccount saccount=sdao.findByAccno(account);
+					Saccount saccount=savrdata.findByAccno(account);
 					response.setAccount(saccount.getAccno());
 					response.setStatus(true);
 					response.setResponseMessage("Success Code 121: Request submitted successfully");
 					chequebook.setRequestStatus(false);
 					chequebook.setAccType("Secondary");
 					chequebook.setDate(today);
-					dao.save(chequebook);
+					cbrdata.save(chequebook);
 					} 
 				catch (Exception e) {
 					response.setAccount(account);
@@ -92,7 +92,7 @@ public class ChequebookServiceimpl implements ChequebookService{
 
 	@Override
 	public List<ChequebookRequest> getRequests(long account) {
-		return dao.findByAccount(account);
+		return cbrdata.findByAccount(account);
 	}
 
 	public static boolean isprimary(long account) {

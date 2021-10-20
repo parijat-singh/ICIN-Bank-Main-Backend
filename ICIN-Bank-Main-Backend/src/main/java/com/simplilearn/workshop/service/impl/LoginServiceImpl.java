@@ -16,7 +16,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 public class LoginServiceImpl implements LoginService{
 	
 	@Autowired
-	private UserRepository dao;
+	private UserRepository urdata;
 	
 	@Override
 	public LoginResponse customerLogin(LoginDetails login){
@@ -26,7 +26,7 @@ public class LoginServiceImpl implements LoginService{
 		User user = null;
 		String hashedPassword = DigestUtils.sha256Hex(login.getPassword());
 		try {
-			user=dao.findByUsername(login.getUsername());
+			user=urdata.findByUsername(login.getUsername());
 			if(user.getStatus()) {
 				flag = false;
 				message = "Error code 130: Dear "+user.getFname()+" your account has been disabled. Please contact Bank Admin";

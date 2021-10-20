@@ -16,10 +16,10 @@ import com.simplilearn.workshop.service.ProfileService;
 public class ProfileServiceImpl implements ProfileService{
 
 	@Autowired
-	private UserRepository dao;
+	private UserRepository urdata;
 	
 	@Autowired
-	private UserDisplayRepository userDisplayDao;
+	private UserDisplayRepository udrdata;
 
 	@Override
 	public UpdateResponse updateUser(UpdateDetails user) {
@@ -28,7 +28,7 @@ public class ProfileServiceImpl implements ProfileService{
 		String message="Success code 140: Update successful"; 
 		try {
 			int counter = 0;
-			User u=dao.findByUsername(user.getUsername());
+			User u=urdata.findByUsername(user.getUsername());
 			if(user.getAddress().length()!=0) {
 				counter++;
 				u.setAddress(user.getAddress());
@@ -48,7 +48,7 @@ public class ProfileServiceImpl implements ProfileService{
 			}
 			System.out.println(counter);
 			if(counter>0) {
-				dao.save(u);
+				urdata.save(u);
 			}
 			else {
 				flag=false;
@@ -66,13 +66,13 @@ public class ProfileServiceImpl implements ProfileService{
 	@Override
 	public User getUser(String username) {
 		// TODO Auto-generated method stub
-				return dao.findByUsername(username);
+				return urdata.findByUsername(username);
 
 	}
 
 	@Override
 	public UserDisplay userDisplay(String username) {
-		UserDisplay user=userDisplayDao.getCurrentUser(username);
+		UserDisplay user=udrdata.getCurrentUser(username);
 		return user;
 	}
 	}

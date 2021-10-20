@@ -16,7 +16,7 @@ import com.simplilearn.workshop.service.TransferHistoryService;
 public class TransferHistoryServiceImpl implements TransferHistoryService{
 
 	@Autowired
-	private TransferHistoryRepository dao;
+	private TransferHistoryRepository thrdata;
 	
 	@Override
 	public Transfer addAction(long saccount, long raccount, int amount) {
@@ -26,13 +26,13 @@ public class TransferHistoryServiceImpl implements TransferHistoryService{
 		transfer.setRaccount(raccount);
 		transfer.setAmount(amount);
 		transfer.setDate(today);
-		return dao.save(transfer);
+		return thrdata.save(transfer);
 	}
 
 	@Override
 	public List<Transfer> getTransfers(long account) {
-		List<Transfer> sender=dao.findBySaccount(account);
-		List<Transfer> receiver=dao.findByRaccount(account);
+		List<Transfer> sender=thrdata.findBySaccount(account);
+		List<Transfer> receiver=thrdata.findByRaccount(account);
 		List<Transfer> merged=new ArrayList<>();
 		merged.addAll(sender);
 		merged.addAll(receiver);

@@ -7,21 +7,13 @@ import org.springframework.stereotype.Service;
 import com.simplilearn.workshop.model.User;
 import com.simplilearn.workshop.repository.UserRepository;
 import com.simplilearn.workshop.response.RegisterResponse;
-import com.simplilearn.workshop.service.AccountService;
 import com.simplilearn.workshop.service.RegistrationService;
-import com.simplilearn.workshop.service.SaccountService;
 
 @Service
 public class RegistrationServiceImpl implements RegistrationService{
 	
 	@Autowired
-	private UserRepository dao;
-	
-	@Autowired
-	private AccountService service;
-	
-	@Autowired 
-	private SaccountService sservice;
+	private UserRepository urdata;
 	
 	@Override
 	public RegisterResponse createAccount(User user){
@@ -48,7 +40,7 @@ public class RegistrationServiceImpl implements RegistrationService{
 		if(flag) {
 			String hashedPassword = DigestUtils.sha256Hex(user.getPassword());
 			user.setPassword(hashedPassword);
-			dao.save(user);
+			urdata.save(user);
 
 		}
 		response.setRegistrationStatus(flag);
@@ -61,7 +53,7 @@ public class RegistrationServiceImpl implements RegistrationService{
 	@Override
 	public boolean usernameAlreadyExists(String username) {
 		try {
-			User u=dao.findByUsername(username);
+			User u=urdata.findByUsername(username);
 			System.out.println(u.toString());
 			return true;
 		} catch (Exception e) {
@@ -72,7 +64,7 @@ public class RegistrationServiceImpl implements RegistrationService{
 	@Override
 	public boolean EmailAlreadyExists(String email) {
 		try {
-			User u=dao.findByEmail(email);
+			User u=urdata.findByEmail(email);
 			System.out.println(u.toString());
 			return true;
 		} catch (Exception e) {
@@ -84,7 +76,7 @@ public class RegistrationServiceImpl implements RegistrationService{
 	@Override
 	public boolean PhoneAlreadyExists(long l) {
 		try {
-			User u=dao.findByPhone(l);
+			User u=urdata.findByPhone(l);
 			System.out.println(u.toString());
 			return true;
 		} catch (Exception e) {

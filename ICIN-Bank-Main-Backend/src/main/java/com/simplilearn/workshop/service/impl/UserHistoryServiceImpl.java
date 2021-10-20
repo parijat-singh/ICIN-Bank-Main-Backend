@@ -14,7 +14,7 @@ import com.simplilearn.workshop.service.UserHistoryService;
 public class UserHistoryServiceImpl implements UserHistoryService{
 
 	@Autowired
-	private UserHistoryRepository dao;
+	private UserHistoryRepository uhrdata;
 	
 	@Override
 	public UserHistory addAction(long account, int amount, int balance, String action) {
@@ -25,13 +25,13 @@ public class UserHistoryServiceImpl implements UserHistoryService{
 		row.setAction(action);
 		row.setAmount(amount);
 		row.setDate(today);
-		return dao.save(row);
+		return uhrdata.save(row);
 	}
 
 	@Override
 	public List<UserHistory> getHistory(long account) {
 		// TODO Auto-generated method stub
-				return dao.findByAccount(account);
+				return uhrdata.findByAccount(account);
 	}
 
 }

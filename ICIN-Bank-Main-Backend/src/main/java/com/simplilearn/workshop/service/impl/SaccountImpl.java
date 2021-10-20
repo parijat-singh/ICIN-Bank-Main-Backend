@@ -21,31 +21,31 @@ import com.simplilearn.workshop.service.UserHistoryService;
 public class SaccountImpl implements SaccountService{
 	
 	@Autowired
-	private SaccountRepository dao;
+	private SaccountRepository savrdata;
 	
 	@Autowired
-	private UserHistoryService service;
+	private UserHistoryService uhsdata;
 	
 	@Autowired
-	private TransferHistoryService tservice;
+	private TransferHistoryService thsdata;
 	
 	@Autowired
-	private AccountRepository adao;
+	private AccountRepository ardata;
 	
 	@Autowired
-	private UserRepository udao;
+	private UserRepository urdata;
 	
 	private static String acctPrefix = "5000000000";
 
 	@Override
 	public Saccount getAccount(String username) {	
-		return dao.findByUsername(username);
+		return savrdata.findByUsername(username);
 	}
 	
 	@Override
 	public Saccount getAccountDetails(long account) {
 		// TODO Auto-generated method stub
-		return dao.findByAccno(account);
+		return savrdata.findByAccno(account);
 	}
 	
 	public long generate_saving(int userId) {
@@ -58,8 +58,8 @@ public class SaccountImpl implements SaccountService{
 		Saccount account =new Saccount();
 		account.setUsername(username);
 		account.setAccno(generate_saving(userId));
-		account.setUser(udao.findByUsername(username));
-		return dao.save(account);
+		account.setUser(urdata.findByUsername(username));
+		return savrdata.save(account);
 	}
 
 	@Override
@@ -67,10 +67,10 @@ public class SaccountImpl implements SaccountService{
 		DepositResponse response=new DepositResponse();
 		boolean flag=true;
 		try {
-			Saccount account=dao.findByAccno(acc);
+			Saccount account=savrdata.findByAccno(acc);
 			account.setBalance(account.getBalance()+amount);
-			service.addAction(acc, amount, account.getBalance(), "deposit");
-			dao.save(account);
+			uhsdata.addAction(acc, amount, account.getBalance(), "deposit");
+			savrdata.save(account);
 			response.setResponseMessage("Success code 160: $"+amount+" successfully deposited. New account balance is $"+account.getBalance());
 			response.setDepositStatus(flag);
 		} catch (Exception e) {
@@ -88,16 +88,16 @@ public class SaccountImpl implements SaccountService{
 		boolean flag=true;
 		
 		try {
-			Saccount account=dao.findByAccno(acc);
-			User user=udao.findByUsername(account.getUsername());
+			Saccount account=savrdata.findByAccno(acc);
+			User user=urdata.findByUsername(account.getUsername());
 			if(user.getFeatureStatus()==2 || user.getFeatureStatus()==3)
 			{
 			
 			if(account.getBalance()>=amount) 
 				{
 				account.setBalance(account.getBalance()-amount);
-				service.addAction(acc, amount, account.getBalance(), "withdraw");
-				dao.save(account);
+				uhsdata.addAction(acc, amount, account.getBalance(), "withdraw");
+				savrdata.save(account);
 				response.setResponseMessage("Success code 161: $"+amount+" successfully withdrawn. New Account balance is $"+account.getBalance());
 				response.setWithdrawStatus(flag);
 				}
@@ -128,21 +128,21 @@ public class SaccountImpl implements SaccountService{
 		boolean flag=true;
 		
 		try {
-			Saccount senderAccount=dao.findByAccno(saccount);
+			Saccount senderAccount=savrdata.findByAccno(saccount);
 			if(isprimary(raccount)) {
-				Account receiverAccount=adao.findByAccno(raccount);
+				Account receiverAccount=ardata.findByAccno(raccount);
 				if(senderAccount.getAccno()!=receiverAccount.getAccno()) 
 				{
 				if(senderAccount.getBalance()>=amount) {
-					User user=udao.findByUsername(senderAccount.getUsername());
+					User user=urdata.findByUsername(senderAccount.getUsername());
 					
 					if(user.getFeatureStatus()==3) 
 					{
 						senderAccount.setBalance(senderAccount.getBalance()-amount);
 						receiverAccount.setBalance(receiverAccount.getBalance()+amount);
-						tservice.addAction(saccount, raccount, amount);
-						dao.save(senderAccount);
-						adao.save(receiverAccount);
+						thsdata.addAction(saccount, raccount, amount);
+						savrdata.save(senderAccount);
+						ardata.save(receiverAccount);
 						response.setResponseMessage("Success code 164: $"+amount+" successfully transferred to account "+receiverAccount.getAccno());
 						response.setTransferStatus(flag);
 					}
@@ -167,20 +167,20 @@ public class SaccountImpl implements SaccountService{
 			}
 			else
 			{
-				Saccount receiverAccount=dao.findByAccno(raccount);
+				Saccount receiverAccount=savrdata.findByAccno(raccount);
 				if(senderAccount.getAccno()!=receiverAccount.getAccno()) 
 				{
 					
 					if(senderAccount.getBalance()>amount) {
-						User user=udao.findByUsername(senderAccount.getUsername());
+						User user=urdata.findByUsername(senderAccount.getUsername());
 						
 						if(user.getFeatureStatus()==3) 
 							{
 								senderAccount.setBalance(senderAccount.getBalance()-amount);
 								receiverAccount.setBalance(receiverAccount.getBalance()+amount);
-								tservice.addAction(saccount, raccount, amount);
-								dao.save(senderAccount);
-								dao.save(receiverAccount);
+								thsdata.addAction(saccount, raccount, amount);
+								savrdata.save(senderAccount);
+								savrdata.save(receiverAccount);
 								response.setResponseMessage("Success code 165: $"+amount+" successfully transferred to account "+receiverAccount.getAccno());
 								response.setTransferStatus(flag);
 							}
