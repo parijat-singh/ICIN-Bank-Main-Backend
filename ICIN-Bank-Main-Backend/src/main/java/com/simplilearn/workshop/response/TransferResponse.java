@@ -4,7 +4,7 @@ public class TransferResponse {
 
 	private boolean transferStatus;
 	private String responseMessage;
-	private long saccount;
+	private long savingsaccount;
 	
 	public boolean isTransferStatus() {
 		return transferStatus;
@@ -19,10 +19,10 @@ public class TransferResponse {
 		this.responseMessage = responseMessage;
 	}
 	public long getSaccount() {
-		return saccount;
+		return savingsaccount;
 	}
-	public void setSaccount(long saccount) {
-		this.saccount = saccount;
+	public void setSaccount(long savingsaccount) {
+		this.savingsaccount = savingsaccount;
 	}
 	
 	

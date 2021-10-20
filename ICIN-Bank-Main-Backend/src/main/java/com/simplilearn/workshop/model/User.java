@@ -27,8 +27,6 @@ public class User {
 	private String password;
 	 @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyy-MM-dd")
 	private Date dob;
-	private String identityType; 
-	private String identity;
 	
 	@Column(columnDefinition = "boolean default false")
 	private boolean status;
@@ -38,12 +36,6 @@ public class User {
     @Column(columnDefinition = "integer default 3",nullable=false)
 	private int featureStatus=3;
 
-	public String getIdentityType() {
-		return identityType;
-	}
-	public void setIdentityType(String identityType) {
-		this.identityType = identityType;
-	}
 	public boolean getStatus() {
 		return status;
 	}
@@ -102,12 +94,6 @@ public class User {
 	}
 	public void setDob(Date dob) {
 		this.dob = dob;
-	}
-	public String getIdentity() {
-		return identity;
-	}
-	public void setIdentity(String identity) {
-		this.identity = identity;
 	}
 	public String getEmail() {
 		return email;
