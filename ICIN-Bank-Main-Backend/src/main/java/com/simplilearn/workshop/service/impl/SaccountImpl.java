@@ -71,11 +71,11 @@ public class SaccountImpl implements SaccountService{
 			account.setBalance(account.getBalance()+amount);
 			service.addAction(acc, amount, account.getBalance(), "deposit");
 			dao.save(account);
-			response.setResponseMessage("$"+amount+" successfully deposited into your account balance is now $"+account.getBalance());
+			response.setResponseMessage("Success code 160: $"+amount+" successfully deposited. New account balance is $"+account.getBalance());
 			response.setDepositStatus(flag);
 		} catch (Exception e) {
 			flag=false;
-			response.setResponseMessage("Account number is incorrect");
+			response.setResponseMessage("Error code 160: Account number is incorrect");
 			response.setDepositStatus(flag);
 		}
 		response.setAccount(acc);
@@ -98,24 +98,24 @@ public class SaccountImpl implements SaccountService{
 				account.setBalance(account.getBalance()-amount);
 				service.addAction(acc, amount, account.getBalance(), "withdraw");
 				dao.save(account);
-				response.setResponseMessage("$"+amount+" successfully withdrawn your account balance is now $"+account.getBalance());
+				response.setResponseMessage("Success code 161: $"+amount+" successfully withdrawn. New Account balance is $"+account.getBalance());
 				response.setWithdrawStatus(flag);
 				}
 			else 
 				{
 				flag=false;
-				response.setResponseMessage("Insufficient funds to complete the transaction");
+				response.setResponseMessage("Error code 162: NSF Error: Low balance in the account");
 				response.setWithdrawStatus(flag);
 				}
 			}
 			else {
 				flag=false;
-				response.setResponseMessage("This function is not available for your account");
+				response.setResponseMessage("Error code 162: Insufficient Privilege. Please contact Bank Admin.");
 				response.setWithdrawStatus(flag);
 			}
 		} catch (Exception e) {
 			flag=false;
-			response.setResponseMessage("Account number is incorrect");
+			response.setResponseMessage("Error code 163: Account number is incorrect");
 			response.setWithdrawStatus(flag);
 		}
 		response.setAccount(acc);
@@ -143,25 +143,25 @@ public class SaccountImpl implements SaccountService{
 						tservice.addAction(saccount, raccount, amount);
 						dao.save(senderAccount);
 						adao.save(receiverAccount);
-						response.setResponseMessage("$"+amount+" successfully transferred to account "+receiverAccount.getAccno());
+						response.setResponseMessage("Success code 164: $"+amount+" successfully transferred to account "+receiverAccount.getAccno());
 						response.setTransferStatus(flag);
 					}
 					else {
 						flag=false;
-						response.setResponseMessage("This feature is not available for your account");
+						response.setResponseMessage("Error code 164: Insufficient Privilege. Please contact Bank Admin");
 						response.setTransferStatus(flag);
 					}
 				}
 				else 
 					{
 					flag=false;
-					response.setResponseMessage("Insufficient funds to complete the transfer");
+					response.setResponseMessage("Error code 165: NSF Error: Balance too low to complete transaction");
 					response.setTransferStatus(flag);
 					}
 			}
 			else {
 				flag=false;
-				response.setResponseMessage("sender and recieiver accounts are same");
+				response.setResponseMessage("Error code 166: Source and traget Account numbers should be different");
 				response.setTransferStatus(flag);
 			}
 			}
@@ -181,32 +181,32 @@ public class SaccountImpl implements SaccountService{
 								tservice.addAction(saccount, raccount, amount);
 								dao.save(senderAccount);
 								dao.save(receiverAccount);
-								response.setResponseMessage("$"+amount+" successfully transferred to account "+receiverAccount.getAccno());
+								response.setResponseMessage("Success code 165: $"+amount+" successfully transferred to account "+receiverAccount.getAccno());
 								response.setTransferStatus(flag);
 							}
 						else {
 								flag=false;
-								response.setResponseMessage("This function isnt available for the account");
+								response.setResponseMessage("Error code 167: Insufficient privilege. Please contact Bank Admin");
 								response.setTransferStatus(flag);
 							}
 						}
 					
 					else {
 							flag=false;
-							response.setResponseMessage("Insufficient funds to complete the transfer");
+							response.setResponseMessage("Error code 168: NSF Error: Account abalnce too low to complete transaction");
 							response.setTransferStatus(flag);
 						}
 				}
 				
 				else {
 						flag=false;
-						response.setResponseMessage("sender and recieiver accounts are same");
+						response.setResponseMessage("Error code 169: Source and Traget Account cannot be same");
 						response.setTransferStatus(flag);
 				}
 			}
 		} catch (Exception e) {
 			flag=false;
-			response.setResponseMessage("Account number is incorrect");
+			response.setResponseMessage("Error code 1691: Account number is incorrect");
 			response.setTransferStatus(flag);
 		}
 		response.setSaccount(saccount);
@@ -216,7 +216,7 @@ public class SaccountImpl implements SaccountService{
 	public static boolean isprimary(long account) {
 		String s = Long.toString(account).substring(0, 10);
 		String check="1000000000";
-		System.out.println("From SaccountImpl: account=" + s + " check=" + check );
+		//System.out.println("From SaccountImpl: account=" + s + " check=" + check );
 		if(s.equals(check)) {
 			return true;
 		}

@@ -25,7 +25,7 @@ public class ProfileServiceImpl implements ProfileService{
 	public UpdateResponse updateUser(UpdateDetails user) {
 		boolean flag=true;
 		UpdateResponse response=new UpdateResponse();
-		String message="Update successful"; 
+		String message="Success code 140: Update successful"; 
 		try {
 			int counter = 0;
 			User u=dao.findByUsername(user.getUsername());
@@ -52,11 +52,11 @@ public class ProfileServiceImpl implements ProfileService{
 			}
 			else {
 				flag=false;
-				message="Please enter some information to update";
+				message="Error code 140: Nothing to update";
 			}
 		}catch(Exception e){
 			flag=false;
-			response.setMessage("Update unsuccesful");
+			response.setMessage("Sucess code 141: Update unsuccesful");
 		}
 		response.setMessage(message);
 		response.setFlag(flag);

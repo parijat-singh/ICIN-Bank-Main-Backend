@@ -28,20 +28,20 @@ public class RegistrationServiceImpl implements RegistrationService{
 		
 		RegisterResponse response = new RegisterResponse();
 		boolean flag = true;
-		String message = "Registration Succesful";
+		String message = "Success code 150: Registration Succesful";
 		
 		if(EmailAlreadyExists(user.getEmail())) {
-			message = "Email already Exists";
+			message = "Error code 150: Email already Exists";
 			flag = false;
 		}
 		
 		if(PhoneAlreadyExists(user.getPhone())) {
-			message = "Phone number already Exists";
+			message = "Error code 151: Phone number already Exists";
 			flag = false;
 		}
 		
 		if(usernameAlreadyExists(user.getUsername())) {
-			message = "Username already Exists";
+			message = "Error code 152: Username already Exists";
 			flag = false;
 		}
 		

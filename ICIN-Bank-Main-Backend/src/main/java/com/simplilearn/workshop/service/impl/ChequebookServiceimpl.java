@@ -35,7 +35,7 @@ public class ChequebookServiceimpl implements ChequebookService{
 		if(!prevRequests.isEmpty()) {
 			for(int i=0;i<prevRequests.size();i++) {
 				if(prevRequests.get(i).isRequestStatus()==false) {
-					response.setResponseMessage("Your previous chequebook request is still pending.");
+					response.setResponseMessage("Error code 120: Your previous chequebook request is still pending.");
 					response.setStatus(false);
 					response.setAccount(account);
 					return response;
@@ -48,7 +48,7 @@ public class ChequebookServiceimpl implements ChequebookService{
 				Account account1 =adao.findByAccno(account);
 				response.setAccount(account1.getAccno());
 				response.setStatus(true);
-				response.setResponseMessage("Request submitted successfully");
+				response.setResponseMessage("Success Code 120: Request submitted successfully");
 				chequebook.setAccType("Primary");
 				chequebook.setDate(today);
 				chequebook.setRequestStatus(false);
@@ -57,7 +57,7 @@ public class ChequebookServiceimpl implements ChequebookService{
 				catch(Exception e) {
 					response.setAccount(account);
 					response.setStatus(false);
-					response.setResponseMessage("Primary account number is incorrect");
+					response.setResponseMessage("Error code 121: Primary account number is incorrect");
 					System.out.println(e);
 				}
 		}
@@ -67,7 +67,7 @@ public class ChequebookServiceimpl implements ChequebookService{
 					Saccount saccount=sdao.findByAccno(account);
 					response.setAccount(saccount.getAccno());
 					response.setStatus(true);
-					response.setResponseMessage("Request submitted successfully");
+					response.setResponseMessage("Success Code 121: Request submitted successfully");
 					chequebook.setRequestStatus(false);
 					chequebook.setAccType("Secondary");
 					chequebook.setDate(today);
@@ -76,14 +76,14 @@ public class ChequebookServiceimpl implements ChequebookService{
 				catch (Exception e) {
 					response.setAccount(account);
 					response.setStatus(false);
-					response.setResponseMessage("Secondary account number is incorrect");
+					response.setResponseMessage("Error code 122: Savings account number is incorrect");
 					}
 		}
 		else
 		{
 			response.setAccount(account);
 			response.setStatus(false);
-			response.setResponseMessage(" Sec account number is incorrect");
+			response.setResponseMessage("Error code 123: Savings account number is incorrect");
 		}
 		
 		}
@@ -98,7 +98,7 @@ public class ChequebookServiceimpl implements ChequebookService{
 	public static boolean isprimary(long account) {
 		String s = Long.toString(account).substring(0, 10);
 		String check="1000000000";
-		System.out.println("From ChequebookServiceImpl: account=" + s + " check=" + check );
+		//System.out.println("From ChequebookServiceImpl: account=" + s + " check=" + check );
 		if(s.equals(check)) {
 			return true;
 		}
@@ -112,7 +112,7 @@ public class ChequebookServiceimpl implements ChequebookService{
 	public static boolean isSecondary(long account) {
 		String s = Long.toString(account).substring(0, 10);
 		String check="5000000000";
-		System.out.println("From ChequebookServiceImpl: account=" + s + " check=" + check );
+		//System.out.println("From ChequebookServiceImpl: account=" + s + " check=" + check );
 		if(s.equals(check)) {
 			return true;
 		}

@@ -22,27 +22,27 @@ public class LoginServiceImpl implements LoginService{
 	public LoginResponse customerLogin(LoginDetails login){
 		LoginResponse response = new LoginResponse();
 		boolean flag = true;
-		String message = "Login succesfull";
+		String message = "Success code 130: Login succesfull";
 		User user = null;
 		String hashedPassword = DigestUtils.sha256Hex(login.getPassword());
 		try {
 			user=dao.findByUsername(login.getUsername());
 			if(user.getStatus()) {
 				flag = false;
-				message = "Dear Mr/Ms."+user.getFname()+" your account has been blocked for security reasons.";
+				message = "Error code 130: Dear "+user.getFname()+" your account has been disabled. Please contact Bank Admin";
 			}
 			if(!user.getAuthorizationStatus()) {
 				flag = false;
-				message = "Dear Mr/Ms."+user.getFname()+" your account has not been activated yet";
+				message = "Error code 131: Dear "+user.getFname()+" Account pending Activation from the Admin";
 			}
 			if(!hashedPassword.equals(user.getPassword())) {
 				flag = false;
-				message = "Username or password is incorrect";
+				message = "Error code 132: Username or password is incorrect";
 			}
 		} 
 		catch (Exception e) {
 			flag = false;
-			message = "Username or password is incorrect";
+			message = "Error code 133: Username or password is incorrect";
 		}
 		
 		response.setLoginStatus(flag);
