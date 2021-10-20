@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.simplilearn.workshop.dao.AccountRepository;
-import com.simplilearn.workshop.dao.SaccountRepository;
 import com.simplilearn.workshop.details.TransactionDetails;
 import com.simplilearn.workshop.details.TransferDetails;
 import com.simplilearn.workshop.model.Account;
 import com.simplilearn.workshop.model.Saccount;
 import com.simplilearn.workshop.model.Transfer;
 import com.simplilearn.workshop.model.UserHistory;
+import com.simplilearn.workshop.repository.AccountRepository;
+import com.simplilearn.workshop.repository.SaccountRepository;
 import com.simplilearn.workshop.response.DepositResponse;
 import com.simplilearn.workshop.response.TransferResponse;
 import com.simplilearn.workshop.response.WithdrawResponse;

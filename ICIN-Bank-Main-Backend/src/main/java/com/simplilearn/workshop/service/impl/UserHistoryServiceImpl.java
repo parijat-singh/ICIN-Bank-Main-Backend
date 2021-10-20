@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.simplilearn.workshop.dao.UserHistoryRepository;
 import com.simplilearn.workshop.model.UserHistory;
+import com.simplilearn.workshop.repository.UserHistoryRepository;
 import com.simplilearn.workshop.service.UserHistoryService;
 
 @Service

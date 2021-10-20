@@ -6,12 +6,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.simplilearn.workshop.dao.AccountRepository;
-import com.simplilearn.workshop.dao.ChequeBookRepository;
-import com.simplilearn.workshop.dao.SaccountRepository;
 import com.simplilearn.workshop.model.Account;
 import com.simplilearn.workshop.model.ChequebookRequest;
 import com.simplilearn.workshop.model.Saccount;
+import com.simplilearn.workshop.repository.AccountRepository;
+import com.simplilearn.workshop.repository.ChequeBookRepository;
+import com.simplilearn.workshop.repository.SaccountRepository;
 import com.simplilearn.workshop.response.ChequeResponse;
 import com.simplilearn.workshop.service.ChequebookService;
 

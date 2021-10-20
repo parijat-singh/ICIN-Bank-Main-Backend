@@ -4,9 +4,9 @@ package com.simplilearn.workshop.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.simplilearn.workshop.dao.UserRepository;
 import com.simplilearn.workshop.details.LoginDetails;
 import com.simplilearn.workshop.model.User;
+import com.simplilearn.workshop.repository.UserRepository;
 import com.simplilearn.workshop.response.LoginResponse;
 import com.simplilearn.workshop.service.LoginService;
 

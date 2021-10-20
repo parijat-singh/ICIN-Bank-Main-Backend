@@ -1,4 +1,4 @@
-package com.simplilearn.workshop.dao;
+package com.simplilearn.workshop.repository;
 
 import java.util.List;
 

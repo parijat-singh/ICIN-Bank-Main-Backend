@@ -8,8 +8,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.simplilearn.workshop.dao.TransferHistoryRepository;
 import com.simplilearn.workshop.model.Transfer;
+import com.simplilearn.workshop.repository.TransferHistoryRepository;
 import com.simplilearn.workshop.service.TransferHistoryService;
 
 @Service

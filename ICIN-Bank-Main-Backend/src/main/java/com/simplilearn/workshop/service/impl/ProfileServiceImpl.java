@@ -4,11 +4,11 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.simplilearn.workshop.dao.UserDisplayRepository;
-import com.simplilearn.workshop.dao.UserRepository;
 import com.simplilearn.workshop.details.UpdateDetails;
 import com.simplilearn.workshop.model.User;
 import com.simplilearn.workshop.model.UserDisplay;
+import com.simplilearn.workshop.repository.UserDisplayRepository;
+import com.simplilearn.workshop.repository.UserRepository;
 import com.simplilearn.workshop.response.UpdateResponse;
 import com.simplilearn.workshop.service.ProfileService;
 

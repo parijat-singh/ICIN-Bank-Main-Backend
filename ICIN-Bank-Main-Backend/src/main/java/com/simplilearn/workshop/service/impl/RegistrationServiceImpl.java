@@ -4,8 +4,8 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.simplilearn.workshop.dao.UserRepository;
 import com.simplilearn.workshop.model.User;
+import com.simplilearn.workshop.repository.UserRepository;
 import com.simplilearn.workshop.response.RegisterResponse;
 import com.simplilearn.workshop.service.AccountService;
 import com.simplilearn.workshop.service.RegistrationService;

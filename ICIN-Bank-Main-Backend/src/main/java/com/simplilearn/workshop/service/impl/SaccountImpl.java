@@ -5,12 +5,12 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.simplilearn.workshop.dao.AccountRepository;
-import com.simplilearn.workshop.dao.SaccountRepository;
-import com.simplilearn.workshop.dao.UserRepository;
 import com.simplilearn.workshop.model.Account;
 import com.simplilearn.workshop.model.Saccount;
 import com.simplilearn.workshop.model.User;
+import com.simplilearn.workshop.repository.AccountRepository;
+import com.simplilearn.workshop.repository.SaccountRepository;
+import com.simplilearn.workshop.repository.UserRepository;
 import com.simplilearn.workshop.response.DepositResponse;
 import com.simplilearn.workshop.response.TransferResponse;
 import com.simplilearn.workshop.response.WithdrawResponse;

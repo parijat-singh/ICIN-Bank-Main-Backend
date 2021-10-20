@@ -1,4 +1,4 @@
-package com.simplilearn.workshop.dao;
+package com.simplilearn.workshop.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
