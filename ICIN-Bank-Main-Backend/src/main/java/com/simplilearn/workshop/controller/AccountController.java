@@ -39,7 +39,7 @@ public class AccountController {
 	private SaccountService sservice;
 	
 	@Autowired
-	private UserHistoryService hservice;
+	private UserHistoryService histservice;
 	
 	@Autowired
 	private TransferHistoryService tservice;
@@ -89,7 +89,6 @@ public class AccountController {
 	
 	@PostMapping("/account/deposit")
 	public DepositResponse deposit(@RequestBody TransactionDetails details) {
-		//adao.findByUsername(adao.findByAccno(details.getAccount()).getUsername());
 		if(isprimary(details.getAccount())) {
 			return service.deposit(details.getAccount(), details.getAmount());
 		}
@@ -154,7 +153,7 @@ public class AccountController {
 	@GetMapping("/account/getHistory/{account}")
 	public List<UserHistory> getHistory(@PathVariable("account") long account )
 	{
-		List<UserHistory> history=hservice.getHistory(account);
+		List<UserHistory> history=histservice.getHistory(account);
 		Collections.reverse(history);
 		return history;
 	}
