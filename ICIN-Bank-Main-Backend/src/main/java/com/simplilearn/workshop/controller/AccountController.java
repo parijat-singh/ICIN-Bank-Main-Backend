@@ -36,7 +36,7 @@ public class AccountController {
 	private AccountService service;
 	
 	@Autowired 
-	private SaccountService sservice;
+	private SaccountService savservice;
 	
 	@Autowired
 	private UserHistoryService histservice;
@@ -84,7 +84,7 @@ public class AccountController {
 	
 	@GetMapping("/account/getsaving/{username}")
 	public Saccount getSavingdetails(@PathVariable("username") String username) {
-		return sservice.getAccount(username);
+		return savservice.getAccount(username);
 	}
 	
 	@PostMapping("/account/deposit")
@@ -93,7 +93,7 @@ public class AccountController {
 			return service.deposit(details.getAccount(), details.getAmount());
 		}
 		else {
-			return sservice.deposit(details.getAccount(), details.getAmount());
+			return savservice.deposit(details.getAccount(), details.getAmount());
 		}
 	}
 	
@@ -104,7 +104,7 @@ public class AccountController {
 		return service.withdraw(details.getAccount(), details.getAmount());
 		}
 		else {
-			return sservice.withdraw(details.getAccount(), details.getAmount());
+			return savservice.withdraw(details.getAccount(), details.getAmount());
 		}
 	}
 	
@@ -122,13 +122,13 @@ public class AccountController {
 						}
 						else
 						{
-							return sservice.transfer(details.getSaccount(), details.getRaccount(), details.getAmount());
+							return savservice.transfer(details.getSaccount(), details.getRaccount(), details.getAmount());
 						}
 						}
 						else {
 							TransferResponse response=new TransferResponse();
 							response.setSaccount(details.getSaccount());
-							response.setResponseMessage("Dear user You can only transfer funds from the accounts registed with you");
+							response.setResponseMessage("Transfer not Allowed!");
 							response.setTransferStatus(false);
 							return response;
 			}
@@ -136,14 +136,14 @@ public class AccountController {
 			else {
 				TransferResponse response=new TransferResponse();
 						response.setSaccount(details.getSaccount());
-						response.setResponseMessage("IFSC code is incorrect");
+						response.setResponseMessage("Invalid Routing Number");
 						response.setTransferStatus(false);
 						return response;
 			}
 		} catch (Exception e) {
 			TransferResponse response=new TransferResponse();
 			response.setSaccount(details.getSaccount());
-			response.setResponseMessage("Please provide an IFSC code");
+			response.setResponseMessage("A valid Routing number is needed. Please contact your bank");
 			response.setTransferStatus(false);
 			return response;
 			

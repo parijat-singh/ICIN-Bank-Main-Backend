@@ -83,12 +83,12 @@ public class AccountServiceImpl implements AccountService{
 			account.setBalance(account.getBalance()+amount);
 			service.addAction(acc, amount, account.getBalance(), "credit");
 			dao.save(account);
-			response.setResponseMessage("$"+amount+" successfully deposited into your account balance is now $"+account.getBalance());
+			response.setResponseMessage("Success Code 100 - $"+amount+" successfully deposited. New balance is $"+account.getBalance());
 			response.setDepositStatus(flag);
 		} 
 		catch (Exception e) {
 			flag=false;
-			response.setResponseMessage("Primary Account number is incorrect");
+			response.setResponseMessage("Error code 100: Checking Account number is incorrect");
 			response.setDepositStatus(flag);
 		}
 		response.setAccount(acc);
@@ -109,19 +109,19 @@ public class AccountServiceImpl implements AccountService{
 					account.setBalance(account.getBalance()-amount);
 					service.addAction(acc, amount, account.getBalance(), "debit");
 					dao.save(account);
-					response.setResponseMessage("$"+amount+" successfully withdrawn your account balance is now $"+account.getBalance());
+					response.setResponseMessage("Success code 101: $"+amount+" successfully withdrawn. New account balance: $"+account.getBalance());
 					response.setWithdrawStatus(flag);
 				}
 			else 
 				{
 					flag=false;
-					response.setResponseMessage("Insufficient funds to complete the transaction");
+					response.setResponseMessage("Error Code 101: NSF Error: Account balance lower than needed for transaction!");
 					response.setWithdrawStatus(flag);
 				}
 			}
 			else {
 				flag=false;
-				response.setResponseMessage("This function is not available for your account");
+				response.setResponseMessage("Error Code 102:Isufficient Account Provilege. Please contact Bank Admin.");
 				response.setWithdrawStatus(flag);
 			}
 			
@@ -129,7 +129,7 @@ public class AccountServiceImpl implements AccountService{
 		
 		catch (Exception e) {
 			flag=false;
-			response.setResponseMessage("Account number is incorrect");
+			response.setResponseMessage("Error Code 103: Account number is incorrect");
 			response.setWithdrawStatus(flag);
 		}
 		
@@ -144,7 +144,6 @@ public class AccountServiceImpl implements AccountService{
 		
 		try {
 			Account senderAccount=dao.findByAccno(saccount);
-			//String check = Long.toString(raccount);
 			if(isprimary(raccount))
 			{
 				Account receiverAccount=dao.findByAccno(raccount);
@@ -160,24 +159,24 @@ public class AccountServiceImpl implements AccountService{
 						tservice.addAction(saccount, raccount, amount);
 						dao.save(senderAccount);
 						dao.save(receiverAccount);
-						response.setResponseMessage("$"+amount+" successfully transferred to account "+receiverAccount.getAccno());
+						response.setResponseMessage("Success code 103: $"+amount+" successfully transferred to account "+receiverAccount.getAccno());
 						response.setTransferStatus(flag);
 						}
 						else {
 							flag=false;
-							response.setResponseMessage("This feature is not available for your account");
+							response.setResponseMessage("Error Code 104: Insufficient Privilege. Please contact Bank Admin!");
 							response.setTransferStatus(flag);
 						}
 					}
 					else {
 						flag=false;
-						response.setResponseMessage("Insufficient funds to complete the transfer");
+						response.setResponseMessage("Error Code 105: NSF Error: Balance lower then needed to complete transaction!");
 						response.setTransferStatus(flag);
 						}
 				}
 				else {
 					flag=false;
-					response.setResponseMessage("sender and recieiver accounts are same");
+					response.setResponseMessage("Error Code 106: Cannot send money to the same account!");
 					response.setTransferStatus(flag);
 				}
 			}
@@ -196,24 +195,24 @@ public class AccountServiceImpl implements AccountService{
 						tservice.addAction(saccount, raccount, amount);
 						dao.save(senderAccount);
 						sdao.save(receiverAccount);
-						response.setResponseMessage("$"+amount+" successfully transferred to account "+receiverAccount.getAccno());
+						response.setResponseMessage("Success code 105: $"+amount+" successfully transferred to account "+receiverAccount.getAccno());
 						response.setTransferStatus(flag);
 							}
 						else {
 							flag=false;
-							response.setResponseMessage("This function isnt available for the account");
+							response.setResponseMessage("Error Code 107: Insufficient Privilege. Please contact Bank Admin!");
 							response.setTransferStatus(flag);
 						}
 						}
 					else {
 						flag=false;
-						response.setResponseMessage("Insufficient funds to complete the transfer");
+						response.setResponseMessage("Error Code 108: NSF Error: Balance lower then needed to complete transaction!");
 						response.setTransferStatus(flag);
 						}
 				}
 				else {
 					flag=false;
-					response.setResponseMessage("sender and recieiver accounts are same");
+					response.setResponseMessage("Error Code 109: Cannot Transfer money to same account");
 					response.setTransferStatus(flag);
 				}
 			}
@@ -221,7 +220,7 @@ public class AccountServiceImpl implements AccountService{
 		
 		catch (Exception e) {
 			flag=false;
-			response.setResponseMessage("Account number is incorrect");
+			response.setResponseMessage("Error Code 110: Account number is incorrect");
 			response.setTransferStatus(flag);
 		}
 		response.setSaccount(saccount);
