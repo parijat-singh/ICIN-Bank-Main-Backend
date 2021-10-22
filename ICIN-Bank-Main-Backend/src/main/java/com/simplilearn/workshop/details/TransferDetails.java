@@ -1,22 +1,11 @@
 package com.simplilearn.workshop.details;
 
 public class TransferDetails {
-	
+
 	private long saccount;
 	private long raccount;
 	private int amount;
 	private String Username;
-	private String ifsc;
-	
-	
-	
-	public String getIfsc() {
-		return ifsc;
-	}
-
-	public void setIfsc(String ifsc) {
-		this.ifsc = ifsc;
-	}
 
 	public String getUsername() {
 		return Username;
@@ -25,7 +14,7 @@ public class TransferDetails {
 	public void setUsername(String username) {
 		Username = username;
 	}
-	
+
 	public long getSaccount() {
 		return saccount;
 	}
@@ -45,10 +34,9 @@ public class TransferDetails {
 	public int getAmount() {
 		return amount;
 	}
-	
+
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
 
-	
 }

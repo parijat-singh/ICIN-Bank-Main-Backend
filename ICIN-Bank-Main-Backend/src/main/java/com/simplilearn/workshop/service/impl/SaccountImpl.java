@@ -126,9 +126,10 @@ public class SaccountImpl implements SaccountService{
 	public TransferResponse transfer(long saccount, long raccount, int amount) {
 		TransferResponse response=new TransferResponse();
 		boolean flag=true;
-		
+		System.out.println("saccount" + saccount + "raccount" + raccount);
 		try {
 			Saccount senderAccount=savrdata.findByAccno(saccount);
+			System.out.println("senderAccount" + senderAccount);
 			if(isprimary(raccount)) {
 				Account receiverAccount=ardata.findByAccno(raccount);
 				if(senderAccount.getAccno()!=receiverAccount.getAccno()) 
