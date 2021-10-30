@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.simplilearn.workshop.model.User;
-import com.simplilearn.workshop.response.RegisterResponse;
+import com.simplilearn.workshop.resp.RegisterResponse;
 import com.simplilearn.workshop.service.RegistrationService;
 
 @RestController

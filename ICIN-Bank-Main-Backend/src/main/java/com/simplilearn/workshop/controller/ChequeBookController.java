@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.simplilearn.workshop.model.ChequebookRequest;
-import com.simplilearn.workshop.response.ChequeResponse;
+import com.simplilearn.workshop.resp.ChequeResponse;
 import com.simplilearn.workshop.service.ChequebookService;
 
 @RestController

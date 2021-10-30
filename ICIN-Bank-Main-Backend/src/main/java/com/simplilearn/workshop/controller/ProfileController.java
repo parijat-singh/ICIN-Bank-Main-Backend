@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.simplilearn.workshop.details.UpdateDetails;
 import com.simplilearn.workshop.model.User;
 import com.simplilearn.workshop.model.UserDisplay;
-import com.simplilearn.workshop.response.UpdateResponse;
+import com.simplilearn.workshop.resp.UpdateResponse;
 import com.simplilearn.workshop.service.ProfileService;
 
 @RestController

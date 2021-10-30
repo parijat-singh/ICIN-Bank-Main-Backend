@@ -9,7 +9,7 @@ import com.simplilearn.workshop.model.User;
 import com.simplilearn.workshop.model.UserDisplay;
 import com.simplilearn.workshop.repository.UserDisplayRepository;
 import com.simplilearn.workshop.repository.UserRepository;
-import com.simplilearn.workshop.response.UpdateResponse;
+import com.simplilearn.workshop.resp.UpdateResponse;
 import com.simplilearn.workshop.service.ProfileService;
 
 @Service

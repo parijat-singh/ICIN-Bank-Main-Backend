@@ -1,15 +1,15 @@
-package com.simplilearn.workshop.response;
+package com.simplilearn.workshop.resp;
 
-public class DepositResponse {
-
-	private boolean depositStatus;
+public class ChequeResponse {
+	
+	private boolean status;
 	private String responseMessage;
 	private long account;
-	public boolean isDepositStatus() {
-		return depositStatus;
+	public boolean isStatus() {
+		return status;
 	}
-	public void setDepositStatus(boolean depositStatus) {
-		this.depositStatus = depositStatus;
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 	public String getResponseMessage() {
 		return responseMessage;
@@ -24,5 +24,6 @@ public class DepositResponse {
 		this.account = account;
 	}
 	
+
 	
 }

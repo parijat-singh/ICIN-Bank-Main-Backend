@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.simplilearn.workshop.details.LoginDetails;
 import com.simplilearn.workshop.model.User;
 import com.simplilearn.workshop.repository.UserRepository;
-import com.simplilearn.workshop.response.LoginResponse;
+import com.simplilearn.workshop.resp.LoginResponse;
 import com.simplilearn.workshop.service.LoginService;
 
 import org.apache.commons.codec.digest.DigestUtils;

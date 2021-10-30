@@ -20,9 +20,7 @@ import com.simplilearn.workshop.model.Transfer;
 import com.simplilearn.workshop.model.UserHistory;
 import com.simplilearn.workshop.repository.AccountRepository;
 import com.simplilearn.workshop.repository.SaccountRepository;
-import com.simplilearn.workshop.response.DepositResponse;
-import com.simplilearn.workshop.response.TransferResponse;
-import com.simplilearn.workshop.response.WithdrawResponse;
+import com.simplilearn.workshop.resp.TransferResponse;
 import com.simplilearn.workshop.service.AccountService;
 import com.simplilearn.workshop.service.SaccountService;
 import com.simplilearn.workshop.service.TransferHistoryService;
@@ -81,25 +79,6 @@ public class AccountController {
 	@GetMapping("/account/getsaving/{username}")
 	public Saccount getSavingdetails(@PathVariable("username") String username) {
 		return savservice.getAccount(username);
-	}
-
-	@PostMapping("/account/deposit")
-	public DepositResponse deposit(@RequestBody TransactionDetails details) {
-		if (isprimary(details.getAccount())) {
-			return service.deposit(details.getAccount(), details.getAmount());
-		} else {
-			return savservice.deposit(details.getAccount(), details.getAmount());
-		}
-	}
-
-	@PostMapping("/account/withdraw")
-	public WithdrawResponse withdraw(@RequestBody TransactionDetails details) {
-
-		if (isprimary(details.getAccount())) {
-			return service.withdraw(details.getAccount(), details.getAmount());
-		} else {
-			return savservice.withdraw(details.getAccount(), details.getAmount());
-		}
 	}
 
 	@PostMapping("/account/transfer")

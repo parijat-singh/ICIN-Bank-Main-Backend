@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.simplilearn.workshop.model.User;
 import com.simplilearn.workshop.repository.UserRepository;
-import com.simplilearn.workshop.response.RegisterResponse;
+import com.simplilearn.workshop.resp.RegisterResponse;
 import com.simplilearn.workshop.service.RegistrationService;
 
 @Service

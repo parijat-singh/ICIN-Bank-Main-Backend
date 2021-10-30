@@ -12,7 +12,7 @@ import com.simplilearn.workshop.model.Saccount;
 import com.simplilearn.workshop.repository.AccountRepository;
 import com.simplilearn.workshop.repository.ChequeBookRepository;
 import com.simplilearn.workshop.repository.SaccountRepository;
-import com.simplilearn.workshop.response.ChequeResponse;
+import com.simplilearn.workshop.resp.ChequeResponse;
 import com.simplilearn.workshop.service.ChequebookService;
 
 @Service

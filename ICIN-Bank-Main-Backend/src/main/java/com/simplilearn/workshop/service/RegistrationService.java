@@ -1,6 +1,6 @@
 package com.simplilearn.workshop.service;
 import com.simplilearn.workshop.model.User;
-import com.simplilearn.workshop.response.RegisterResponse;
+import com.simplilearn.workshop.resp.RegisterResponse;
 
 public interface RegistrationService {
 

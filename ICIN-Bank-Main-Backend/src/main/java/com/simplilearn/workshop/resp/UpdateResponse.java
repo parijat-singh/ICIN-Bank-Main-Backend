@@ -1,4 +1,4 @@
-package com.simplilearn.workshop.response;
+package com.simplilearn.workshop.resp;
 
 public class UpdateResponse {
 	

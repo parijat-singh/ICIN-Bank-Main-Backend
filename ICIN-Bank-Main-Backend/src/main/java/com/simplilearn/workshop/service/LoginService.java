@@ -1,7 +1,7 @@
 package com.simplilearn.workshop.service;
 
 import com.simplilearn.workshop.details.LoginDetails;
-import com.simplilearn.workshop.response.LoginResponse;
+import com.simplilearn.workshop.resp.LoginResponse;
 
 public interface LoginService {
 

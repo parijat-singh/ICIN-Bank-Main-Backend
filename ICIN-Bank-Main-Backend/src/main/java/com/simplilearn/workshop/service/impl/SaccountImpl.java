@@ -11,9 +11,7 @@ import com.simplilearn.workshop.model.User;
 import com.simplilearn.workshop.repository.AccountRepository;
 import com.simplilearn.workshop.repository.SaccountRepository;
 import com.simplilearn.workshop.repository.UserRepository;
-import com.simplilearn.workshop.response.DepositResponse;
-import com.simplilearn.workshop.response.TransferResponse;
-import com.simplilearn.workshop.response.WithdrawResponse;
+import com.simplilearn.workshop.resp.TransferResponse;
 import com.simplilearn.workshop.service.SaccountService;
 import com.simplilearn.workshop.service.TransferHistoryService;
 import com.simplilearn.workshop.service.UserHistoryService;
@@ -62,65 +60,6 @@ public class SaccountImpl implements SaccountService{
 		return savrdata.save(account);
 	}
 
-	@Override
-	public DepositResponse deposit(long acc, int amount) {
-		DepositResponse response=new DepositResponse();
-		boolean flag=true;
-		try {
-			Saccount account=savrdata.findByAccno(acc);
-			account.setBalance(account.getBalance()+amount);
-			uhsdata.addAction(acc, amount, account.getBalance(), "deposit");
-			savrdata.save(account);
-			response.setResponseMessage("Success code 160: $"+amount+" successfully deposited. New account balance is $"+account.getBalance());
-			response.setDepositStatus(flag);
-		} catch (Exception e) {
-			flag=false;
-			response.setResponseMessage("Error code 160: Account number is incorrect");
-			response.setDepositStatus(flag);
-		}
-		response.setAccount(acc);
-		return response; 
-	}
-
-	@Override
-	public WithdrawResponse withdraw(long acc, int amount) {
-		WithdrawResponse response=new WithdrawResponse();
-		boolean flag=true;
-		
-		try {
-			Saccount account=savrdata.findByAccno(acc);
-			User user=urdata.findByUsername(account.getUsername());
-			if(user.getFeatureStatus()==2 || user.getFeatureStatus()==3)
-			{
-			
-			if(account.getBalance()>=amount) 
-				{
-				account.setBalance(account.getBalance()-amount);
-				uhsdata.addAction(acc, amount, account.getBalance(), "withdraw");
-				savrdata.save(account);
-				response.setResponseMessage("Success code 161: $"+amount+" successfully withdrawn. New Account balance is $"+account.getBalance());
-				response.setWithdrawStatus(flag);
-				}
-			else 
-				{
-				flag=false;
-				response.setResponseMessage("Error code 162: NSF Error: Low balance in the account");
-				response.setWithdrawStatus(flag);
-				}
-			}
-			else {
-				flag=false;
-				response.setResponseMessage("Error code 162: Insufficient Privilege. Please contact Bank Admin.");
-				response.setWithdrawStatus(flag);
-			}
-		} catch (Exception e) {
-			flag=false;
-			response.setResponseMessage("Error code 163: Account number is incorrect");
-			response.setWithdrawStatus(flag);
-		}
-		response.setAccount(acc);
-		return response;
-	}
 
 	@Override
 	public TransferResponse transfer(long saccount, long raccount, int amount) {
